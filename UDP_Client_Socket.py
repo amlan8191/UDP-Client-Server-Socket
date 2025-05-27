@@ -1,14 +1,20 @@
 import socket
 
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server_address = ('127.0.0.1', 12333)
+client_socket=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+
+IP=input("Enter IP_addres: ")
+port=input("Enter Port number: ")
+
+Port=int(port)
 
 
-message = "Hey I'm the Client".encode('utf-8')
-client_socket.sendto(message, server_address)
-        
-data, addr = client_socket.recvfrom(1024)  # buffer size is required
 
-print("Received from server:", data.decode('utf-8'))
+payload=input("Enter payload").encode('utf-8')
+addr=(IP,Port)
+
+client_socket.sendto(payload,addr)
+data,addr=client_socket.recvfrom(1472)
+print(str(data))
+print("Client sending data to server  port  %s"%Port )
 
 client_socket.close()
